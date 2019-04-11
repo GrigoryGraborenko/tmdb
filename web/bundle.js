@@ -216,16 +216,17 @@ var CreateComponent = __webpack_require__(24)(React);
 
 var moment = __webpack_require__(54);
 
-exports.default = CreateComponent({ route: "route", movie: "movie", pending: "_pending" }, {
+exports.default = CreateComponent({ route: "route", movies: "movie_list", movie: "movie", pending: "_pending" }, {
     renderMovieDetails: function renderMovieDetails(movie) {
 
-        // console.log(movie);
         var release_date = moment(movie.release_date, "YYYY-MM-DD");
-        var hours = Math.floor(movie.runtime / 60);
-        var minutes = movie.runtime % 60;
-        var runtime = hours + "h";
-        if (minutes) {
-            runtime += " " + minutes + "m";
+        if (movie.runtime) {
+            var hours = Math.floor(movie.runtime / 60);
+            var minutes = movie.runtime % 60;
+            var runtime = hours + "h";
+            if (minutes) {
+                runtime += " " + minutes + "m";
+            }
         }
 
         return React.createElement(
@@ -242,7 +243,7 @@ exports.default = CreateComponent({ route: "route", movie: "movie", pending: "_p
                 { className: 'header' },
                 React.createElement('img', { src: "https://image.tmdb.org/t/p/w500/" + movie.poster_path }),
                 React.createElement(
-                    'h1',
+                    'h2',
                     null,
                     movie.title
                 ),
@@ -257,32 +258,43 @@ exports.default = CreateComponent({ route: "route", movie: "movie", pending: "_p
                 React.createElement(
                     'div',
                     { className: 'runtime' },
-                    runtime
+                    runtime ? runtime : "Loading..."
                 )
             ),
             React.createElement(
                 'div',
                 { className: 'overview' },
                 React.createElement(
-                    'h2',
+                    'h3',
                     null,
                     'Overview'
                 ),
-                movie.overview
+                React.createElement(
+                    'p',
+                    null,
+                    movie.overview
+                )
             )
         );
     },
     render: function render() {
 
-        /// show loading if the movie hasn't loaded or isn't already cached
-        if (!this.props.movie || this.props.pending.movie_view && this.props.route.params.movie_id !== this.props.movie.id) {
+        /// show partial if the movie hasn't loaded or isn't already cached
+        if (this.props.movies && (!this.props.movie || this.props.pending.movie_view && this.props.route.params.movie_id !== this.props.movie.id)) {
+            var found_movie = this.props.movies.find(function (movie) {
+                return movie.id == this.props.route.params.movie_id;
+            }, this);
+        } else {
+            var found_movie = this.props.movie;
+        }
+        if (found_movie) {
+            var details = this.renderMovieDetails(found_movie);
+        } else {
             var details = React.createElement(
-                'div',
-                null,
+                'h1',
+                { style: { color: "white" } },
                 'Loading...'
             );
-        } else {
-            var details = this.renderMovieDetails(this.props.movie);
         }
 
         return React.createElement(
@@ -324,15 +336,16 @@ exports.default = CreateComponent({ movies: "movie_list" }, {
     },
     handleSearchChange: function handleSearchChange(evnt) {
         this.setState({ search: evnt.target.value });
-    },
-    handleMovieNavigate: function handleMovieNavigate(movie) {
-        this.action("movie_view", { movie_id: movie.id });
-    },
+    }
+    /// alternative way to navigate
+    // ,handleMovieNavigate(movie) {
+    //     this.action("movie_view", { movie_id: movie.id });
+    // }
+    ,
     renderMoviePreview: function renderMoviePreview(movie) {
 
         var release_date = moment(movie.release_date, "YYYY-MM-DD");
 
-        // console.log(movie);
         var score_class = "score ";
         if (movie.vote_average >= 7.5) {
             score_class += "good-bg";
@@ -344,14 +357,6 @@ exports.default = CreateComponent({ movies: "movie_list" }, {
             score_class += "hide";
         }
 
-        // return (
-        //     <a onClick={ this.handleMovieNavigate.bind(this, movie) } key={ movie.id }>
-        //         <img src={ "https://image.tmdb.org/t/p/w500/" + movie.poster_path } />
-        //         <div className={ score_class }>{ Math.floor(movie.vote_average * 10 + 0.5) + "%" }</div>
-        //         <div className="title">{ movie.title }</div>
-        //         <div className="release-date">{ release_date.format("MMMM YYYY") }</div>
-        //     </a>
-        // );
         return React.createElement(
             _action2.default,
             { store: this.props.store, key: movie.id, name: 'movie_view', movie_id: movie.id },
@@ -392,13 +397,14 @@ exports.default = CreateComponent({ movies: "movie_list" }, {
 
         return React.createElement(
             'div',
-            null,
+            { className: 'front-page' },
+            React.createElement('img', { src: 'https://www.themoviedb.org/assets/2/v4/logos/primary-green-d70eebe18a5eb5b166d5c1ef0796715b8d1a2cbc698f96d311d62f894ae87085.svg' }),
+            React.createElement('input', { value: this.state.search, onChange: this.handleSearchChange, placeholder: 'Search' }),
             React.createElement(
-                'h1',
+                'h3',
                 null,
-                'Movie listing'
+                'Popular Movies'
             ),
-            React.createElement('input', { value: this.state.search, onChange: this.handleSearchChange }),
             React.createElement(
                 'div',
                 { className: 'movie-listing' },

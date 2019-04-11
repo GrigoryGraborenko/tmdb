@@ -96,14 +96,84 @@
 .bad-border {
   border-color: #cb135e; }
 
+.blue-col {
+  color: #7396a6; }
+
+.blue-bg {
+  background-color: #7396a6; }
+
+.blue-hover:hover {
+  color: #7396a6; }
+
+.blue-fill {
+  fill: #7396a6; }
+
+.blue-stroke {
+  stroke: #7396a6;
+  stroke-width: 0; }
+
+.blue-border {
+  border-color: #7396a6; }
+
+.dark-blue-col {
+  color: #071c2c; }
+
+.dark-blue-bg {
+  background-color: #071c2c; }
+
+.dark-blue-hover:hover {
+  color: #071c2c; }
+
+.dark-blue-fill {
+  fill: #071c2c; }
+
+.dark-blue-stroke {
+  stroke: #071c2c;
+  stroke-width: 0; }
+
+.dark-blue-border {
+  border-color: #071c2c; }
+
 body {
-  margin: 0; }
+  margin: 0;
+  background-color: #040e16; }
 
 a {
   color: black;
   cursor: pointer; }
   a:hover, a:visited, a:link, a:active {
     text-decoration: none; }
+
+.front-page {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center; }
+  .front-page > img {
+    margin: 10px;
+    width: 100px; }
+  .front-page > input {
+    margin: 10px;
+    width: 200px;
+    border-radius: 1em;
+    padding: 9px;
+    border: none; }
+    .front-page > input::placeholder {
+      color: #15d477;
+      opacity: 1; }
+    .front-page > input:-ms-input-placeholder, .front-page > input::-ms-input-placeholder {
+      color: #15d477; }
+  .front-page > h3 {
+    align-self: flex-start;
+    margin: 10px;
+    font-weight: bold;
+    color: white; }
 
 .movie-listing {
   display: flex;
@@ -115,8 +185,7 @@ a {
   justify-content: align-left;
   -webkit-justify-content: align-left;
   align-items: center;
-  -webkit-align-items: center;
-  border: 1px solid black; }
+  -webkit-align-items: center; }
   @media only screen and (-webkit-min-device-pixel-ratio: 2.01), only screen and (min-resolution: 193dpi), only screen and (max-width: 768px) {
     .movie-listing {
       display: flex;
@@ -125,13 +194,12 @@ a {
       -webkit-flex-wrap: wrap;
       flex-direction: row;
       -webkit-flex-direction: row;
-      justify-content: center;
-      -webkit-justify-content: center;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
       align-items: center;
       -webkit-align-items: center; } }
   .movie-listing > a {
     flex: 0 0 auto;
-    border: 1px solid red;
     margin: 10px;
     width: 200px;
     cursor: pointer;
@@ -141,28 +209,35 @@ a {
       width: 100%;
       padding: 0;
       margin: 0;
-      object-fit: cover; }
+      object-fit: cover;
+      border-radius: 0.5em; }
     .movie-listing > a > div {
       width: 100%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
       .movie-listing > a > div.title {
-        font-size: 0.8em; }
+        font-size: 0.9em;
+        color: white; }
       .movie-listing > a > div.release-date {
-        font-size: 0.5em; }
+        font-size: 0.7em;
+        color: #7396a6; }
       .movie-listing > a > div.score {
         position: absolute;
         left: 10px;
         top: 10px;
         color: white;
-        width: unset; }
+        width: unset;
+        padding: 2px 8px;
+        font-size: 0.7em;
+        border-radius: 0.5em;
+        font-weight: bold; }
 
 .movie-detail {
   position: relative; }
   .movie-detail > img {
     width: 100%;
-    height: 200px;
+    height: 150px;
     object-fit: cover; }
   .movie-detail .back {
     position: absolute;
@@ -171,15 +246,29 @@ a {
     color: white;
     cursor: pointer; }
   .movie-detail .header {
-    border: 1px solid black;
     position: relative;
-    padding-left: 140px; }
+    padding-left: 160px;
+    padding-bottom: 1.5em; }
     .movie-detail .header > img {
       position: absolute;
-      top: -50px;
+      top: -80px;
       left: 20px;
-      width: 100px; }
+      width: 120px;
+      border-radius: 0.5em;
+      -moz-box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.25);
+      -webkit-box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.25);
+      box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.25); }
+    .movie-detail .header > h2 {
+      color: white; }
     .movie-detail .header > div {
-      border: 1px solid red; }
+      color: #7396a6;
+      font-size: 0.7em;
+      padding: 0.25em 0; }
   .movie-detail .overview {
-    padding: 0 20px; }
+    margin: 0 20px;
+    color: #7396a6;
+    border-top: 1px solid #071c2c; }
+    .movie-detail .overview > h3 {
+      color: white; }
+    .movie-detail .overview p {
+      font-size: 0.9em; }
