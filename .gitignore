@@ -1,7 +1,6 @@
 .idea
 log
 babel_cache
-build
 build_dev
 node_modules/
 config/*
