@@ -5,8 +5,11 @@ const CreateComponent = require('boc/component')(React);
 
 export default CreateComponent({ route: "route", movie: "movie", pending: "_pending" }, {
     renderMovieDetails(movie) {
+
+        // console.log(movie);
+
         return (
-            <div>{ movie.id }</div>
+            <div>{ movie.title }</div>
         );
     }
     ,render() {

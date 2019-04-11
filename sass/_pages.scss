@@ -1,0 +1,60 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+h1 {
+  color: darkgray;
+}
+
+.movie-listing {
+
+  @include flex-container(row, align-left, center);
+
+  @include mobile {
+    @include flex-container(row, center, center);
+  }
+
+  border: 1px solid black;
+  > div {
+    flex: 0 0 auto;
+    border: 1px solid red;
+    margin: 10px;
+    width: 200px;
+    cursor: pointer;
+    position: relative;
+
+    //@include mobile {
+    //  &:last-of-type {
+    //    margin-right: auto;
+    //  }
+    //}
+
+    > img {
+      //width: 200px;
+      height: 290px;
+      width: 100%;
+      //height: 100%;
+      padding: 0;
+      margin: 0;
+      object-fit: cover;
+    }
+    > div {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &.title {
+        font-size: 0.8em;
+      }
+      &.release-date {
+        font-size: 0.5em;
+      }
+      &.score {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        color: green;
+      }
+    }
+
+
+  }
+}

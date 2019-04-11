@@ -1,10 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const fs = require("fs");
-const util = require('util');
-const Sequelize = require('sequelize');
-const crypto = require('crypto');
-const zlib = require('zlib');
+import https from "https"
 
 import moment from "moment"
 
@@ -78,4 +75,27 @@ export async function LoadFixtures(db, fixtures, fixture_seed) {
         }
     }
     return cache;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+export function MakeHTTPSRequest(options, body) {
+
+    return new Promise(function(fulfill, reject) {
+        var req = https.request(options, function(res) {
+            var chucks = [];
+            res.on('data', function(chunk) {
+                chucks.push(chunk);
+            });
+            res.on('end', function() {
+                fulfill(Buffer.concat(chucks));
+            });
+        });
+        req.on('error', function(err) {
+            reject(err);
+        });
+        if(body !== undefined) {
+            req.write(body);
+        }
+        req.end();
+    });
 }

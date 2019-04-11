@@ -1,0 +1,31 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@mixin flex-container($direction, $justify: null, $align: null) {
+  display: flex; display: -webkit-flex;
+  flex-wrap: wrap; -webkit-flex-wrap: wrap;
+  flex-direction: $direction; -webkit-flex-direction: $direction;
+  @if $justify != null {
+    justify-content: $justify; -webkit-justify-content: $justify;
+  }
+  @if $align != null {
+    align-items: $align; -webkit-align-items: $align;
+  }
+}
+
+@mixin mobile {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2.01), only screen and (min-resolution: 193dpi), only screen and (max-width: $screen-sm) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (-webkit-max-device-pixel-ratio: 2.0) and (min-width: ($screen-sm - 1)), only screen and (max-resolution: 192dpi) and (min-width: ($screen-sm - 1)) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media screen and (-webkit-max-device-pixel-ratio: 1.0) and (min-width: ($screen-lg - 1)), only screen and (max-resolution: 96dpi) and (min-width: ($screen-lg - 1)) {
+    @content;
+  }
+}
