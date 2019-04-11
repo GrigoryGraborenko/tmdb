@@ -56,7 +56,7 @@ $corner-radius: 0.5em;
   > a {
     flex: 0 0 auto;
     margin: 10px;
-    width: 200px;
+    width: 150px;
     cursor: pointer;
     position: relative;
 
@@ -67,7 +67,7 @@ $corner-radius: 0.5em;
     //}
 
     > img {
-      height: 290px;
+      height: 220px;
       width: 100%;
       padding: 0;
       margin: 0;
@@ -92,7 +92,7 @@ $corner-radius: 0.5em;
         left: 10px;
         top: 10px;
         color: white;
-        width: unset;
+        width: auto;
         padding: 2px 8px;
         font-size: 0.7em;
         border-radius: $corner-radius;

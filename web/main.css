@@ -201,11 +201,11 @@ a {
   .movie-listing > a {
     flex: 0 0 auto;
     margin: 10px;
-    width: 200px;
+    width: 150px;
     cursor: pointer;
     position: relative; }
     .movie-listing > a > img {
-      height: 290px;
+      height: 220px;
       width: 100%;
       padding: 0;
       margin: 0;
@@ -227,7 +227,7 @@ a {
         left: 10px;
         top: 10px;
         color: white;
-        width: unset;
+        width: auto;
         padding: 2px 8px;
         font-size: 0.7em;
         border-radius: 0.5em;
