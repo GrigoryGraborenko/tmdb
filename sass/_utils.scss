@@ -29,3 +29,30 @@
     @content;
   }
 }
+
+.hide {
+  display: none;
+}
+
+@each $color_name, $color in $colors {
+
+  .#{$color_name}-col {
+    color: $color;
+  }
+  .#{$color_name}-bg {
+    background-color: $color;
+  }
+  .#{$color_name}-hover:hover {
+    color: $color;
+  }
+  .#{$color_name}-fill {
+    fill: $color;
+  }
+  .#{$color_name}-stroke {
+    stroke: $color;
+    stroke-width: 0;
+  }
+  .#{$color_name}-border {
+    border-color: $color;
+  }
+}
