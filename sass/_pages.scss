@@ -2,6 +2,7 @@
 
 body {
   margin: 0;
+  background-color: map-get($colors, background);
 }
 
 a {
@@ -12,18 +13,48 @@ a {
   }
 }
 
+$corner-radius: 0.5em;
+
+.front-page {
+  @include flex-container(column, center, center);
+  > img {
+    margin: 10px;
+    width: 100px;
+  }
+  > input {
+    margin: 10px;
+    width: 200px;
+    border-radius: 1em;
+    padding: 9px;
+    border: none;
+
+    &::placeholder {
+      color: map-get($colors, good);
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder, &::-ms-input-placeholder {
+      color: map-get($colors, good);
+    }
+  }
+  > h3 {
+    align-self: flex-start;
+    margin: 10px;
+    font-weight: bold;
+    color: white;
+  }
+}
+
 .movie-listing {
 
   @include flex-container(row, align-left, center);
 
   @include mobile {
-    @include flex-container(row, center, center);
+    @include flex-container(row, space-between, center);
   }
 
-  border: 1px solid black;
   > a {
     flex: 0 0 auto;
-    border: 1px solid red;
     margin: 10px;
     width: 200px;
     cursor: pointer;
@@ -36,13 +67,12 @@ a {
     //}
 
     > img {
-      //width: 200px;
       height: 290px;
       width: 100%;
-      //height: 100%;
       padding: 0;
       margin: 0;
       object-fit: cover;
+      border-radius: $corner-radius;
     }
     > div {
       width: 100%;
@@ -50,10 +80,12 @@ a {
       overflow: hidden;
       text-overflow: ellipsis;
       &.title {
-        font-size: 0.8em;
+        font-size: 0.9em;
+        color: white;
       }
       &.release-date {
-        font-size: 0.5em;
+        font-size: 0.7em;
+        color: map-get($colors, blue);
       }
       &.score {
         position: absolute;
@@ -61,6 +93,10 @@ a {
         top: 10px;
         color: white;
         width: unset;
+        padding: 2px 8px;
+        font-size: 0.7em;
+        border-radius: $corner-radius;
+        font-weight: bold;
       }
     }
   }
@@ -68,13 +104,13 @@ a {
 
 .movie-detail {
 
-  $poster-width: 100px;
+  $poster-width: 120px;
   $poster-pad: 20px;
 
   position: relative;
   > img {
     width: 100%;
-    height: 200px;
+    height: 150px;
     object-fit: cover;
   }
   .back {
@@ -85,22 +121,39 @@ a {
     cursor: pointer;
   }
   .header {
-    border: 1px solid black;
     position: relative;
     padding-left: ($poster-width + $poster-pad * 2);
+    padding-bottom: 1.5em;
     > img {
       position: absolute;
-      top: -50px;
+      top: -80px;
       left: $poster-pad;
       width: $poster-width;
+      border-radius: $corner-radius;
+
+      -moz-box-shadow:    2px 2px 1px 1px rgba(0, 0, 0, 0.25);
+      -webkit-box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.25);
+      box-shadow:         2px 2px 1px 1px rgba(0, 0, 0, 0.25);
+    }
+    > h2 {
+      color: white;
     }
     > div {
-      //left: 200px;
-      border: 1px solid red;
+      color: map-get($colors, blue);
+      font-size: 0.7em;
+      padding: 0.25em 0;
     }
   }
   .overview {
-    padding: 0 $poster-pad;
+    margin: 0 $poster-pad;
+    color: map-get($colors, blue);
+    border-top: 1px solid map-get($colors, dark-blue);
+    > h3 {
+      color: white;
+    }
+    p {
+      font-size: 0.9em;
+    }
   }
 
 }

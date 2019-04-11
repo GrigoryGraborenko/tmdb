@@ -14,14 +14,14 @@ export default CreateComponent({ movies: "movie_list" }, {
     ,handleSearchChange(evnt) {
         this.setState({ search: evnt.target.value });
     }
-    ,handleMovieNavigate(movie) {
-        this.action("movie_view", { movie_id: movie.id });
-    }
+    /// alternative way to navigate
+    // ,handleMovieNavigate(movie) {
+    //     this.action("movie_view", { movie_id: movie.id });
+    // }
     ,renderMoviePreview(movie) {
 
         var release_date = moment(movie.release_date, "YYYY-MM-DD");
 
-        // console.log(movie);
         var score_class = "score ";
         if(movie.vote_average >= 7.5) {
             score_class += "good-bg";
@@ -33,14 +33,6 @@ export default CreateComponent({ movies: "movie_list" }, {
             score_class += "hide";
         }
 
-        // return (
-        //     <a onClick={ this.handleMovieNavigate.bind(this, movie) } key={ movie.id }>
-        //         <img src={ "https://image.tmdb.org/t/p/w500/" + movie.poster_path } />
-        //         <div className={ score_class }>{ Math.floor(movie.vote_average * 10 + 0.5) + "%" }</div>
-        //         <div className="title">{ movie.title }</div>
-        //         <div className="release-date">{ release_date.format("MMMM YYYY") }</div>
-        //     </a>
-        // );
         return (
             <Action store={ this.props.store } key={ movie.id } name="movie_view" movie_id={ movie.id } >
                 <img src={ "https://image.tmdb.org/t/p/w500/" + movie.poster_path } />
@@ -68,9 +60,10 @@ export default CreateComponent({ movies: "movie_list" }, {
         }
 
         return (
-            <div>
-                <h1>Movie listing</h1>
-                <input value={ this.state.search } onChange={ this.handleSearchChange } />
+            <div className="front-page">
+                <img src="https://www.themoviedb.org/assets/2/v4/logos/primary-green-d70eebe18a5eb5b166d5c1ef0796715b8d1a2cbc698f96d311d62f894ae87085.svg" />
+                <input value={ this.state.search } onChange={ this.handleSearchChange } placeholder="Search" />
+                <h3>Popular Movies</h3>
                 <div className="movie-listing">
                     { movies }
                 </div>
